@@ -11,9 +11,10 @@ final class BasicRouteTest extends TestCase
     public function testCanMapGetRequest(): void
     {
         $router = new Router();
-        $router->get('/books', 'book_get_handler');
+        $router->get('/books', 'HandlerClass:handlerMethod');
         $handler = $router->determineRoute('GET', '/books');
-        $this->assertSame($handler, 'book_get_handler');
+        $this->assertSame($handler['class'], 'HandlerClass');
+        $this->assertSame($handler['method'], 'handlerMethod');
     }
 
     public function testThrowsExceptionForUnknownRoute(): void
@@ -21,6 +22,14 @@ final class BasicRouteTest extends TestCase
         $this->expectException(UnknownRouteException::class);
         $router = new Router();
         $router->determineRoute('GET', '/books');
+    }
 
+    public function testAllowsOverridingSeparatorRoute(): void
+    {
+        $router = new Router('->');
+        $router->get('/books', 'HandlerClass->handlerMethod');
+        $handler = $router->determineRoute('GET', '/books');
+        $this->assertSame($handler['class'], 'HandlerClass');
+        $this->assertSame($handler['method'], 'handlerMethod');
     }
 }

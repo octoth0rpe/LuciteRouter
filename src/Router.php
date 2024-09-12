@@ -6,7 +6,13 @@ namespace Lucite\Router;
 
 class Router
 {
+    protected string $separator;
     protected $paths = [];
+
+    public function __construct(string $separator = ':')
+    {
+        $this->separator = $separator;
+    }
 
     public function get(string $path, string $handler): Router
     {
@@ -38,12 +44,19 @@ class Router
         return $this;
     }
 
-    public function determineRoute(string $method, string $path): string
+    public function determineRoute(string $method, string $path): array
     {
         if (isset($this->paths[$path])) {
             $details = $this->paths[$path];
             if (in_array($method, $details[0])) {
-                return $details[1];
+                $parts = explode($this->separator, $details[1]);
+                if (count($parts) !== 2) {
+                    throw new InvalidRouteException($details[1], $this->separator);
+                }
+                return [
+                    'class' => $parts[0],
+                    'method' => $parts[1],
+                ];
             }
         }
         throw new UnknownRouteException($method, $path);
