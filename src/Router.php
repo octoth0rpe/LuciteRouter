@@ -13,6 +13,7 @@ class Router
         $this->paths[$path] = [['GET'], $handler];
         return $this;
     }
+
     public function post(string $path, string $handler): Router
     {
         $this->paths[$path] = [['POST'], $handler];
