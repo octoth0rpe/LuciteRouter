@@ -1,0 +1,26 @@
+{
+    "name": "lucite/router",
+    "type": "library",
+    "require-dev": {
+        "phpunit/phpunit": "^11.3",
+        "laravel/pint": "^1.17"
+    },
+    "license": "MIT",
+    "version": "0.0.1",
+    "autoload": {
+        "psr-4": {
+            "Lucite\\Router\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Mike Thorn",
+            "email": "mthorn.work@gmail.com"
+        }
+    ],
+    "require": {},
+    "scripts": {
+        "format": "pint --preset psr12",
+        "test": "phpunit tests/"
+    }
+}
