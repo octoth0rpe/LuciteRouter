@@ -6,7 +6,7 @@
         "laravel/pint": "^1.17"
     },
     "license": "MIT",
-    "version": "0.0.3",
+    "version": "0.0.4",
     "autoload": {
         "psr-4": {
             "Lucite\\Router\\": "src/"
