@@ -13,9 +13,8 @@ final class BasicRouteTest extends TestCase
     {
         $router = new Router();
         $router->get('/books', 'HandlerClass');
-        [$handler, $method] = $router->determineRoute(new MockRequest('GET', '/books'));
-        $this->assertSame($handler, 'HandlerClass');
-        $this->assertSame($method, 'get');
+        $route = $router->determineRoute(new MockRequest('GET', '/books'));
+        $this->assertSame($route->handler, 'HandlerClass');
     }
 
     public function testThrowsExceptionForUnknownRoute(): void
@@ -31,12 +30,11 @@ final class BasicRouteTest extends TestCase
         $router->get('/books', 'HandlerClass');
         $router->post('/books', 'HandlerClass');
 
-        [$handler, $method] = $router->determineRoute(new MockRequest('POST', '/books'));
-        $this->assertSame($handler, 'HandlerClass');
-        $this->assertSame($method, 'post');
+        $route = $router->determineRoute(new MockRequest('POST', '/books'));
+        $this->assertSame($route->handler, 'HandlerClass');
 
-        [$handler, $method] = $router->determineRoute(new MockRequest('GET', '/books'));
-        $this->assertSame($handler, 'HandlerClass');
-        $this->assertSame($method, 'get');
+
+        $route = $router->determineRoute(new MockRequest('GET', '/books'));
+        $this->assertSame($route->handler, 'HandlerClass');
     }
 }

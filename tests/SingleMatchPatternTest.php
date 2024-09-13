@@ -12,19 +12,17 @@ class SingleMatchPatternTest extends TestCase
     {
         $router = new Router();
         $router->post('/books/*', 'HandlerClass');
-        [$handler, $method, $args] = $router->determineRoute(new MockRequest('POST', '/books/999a9'));
-        $this->assertSame($handler, 'HandlerClass');
-        $this->assertSame($method, 'post');
-        $this->assertSame($args[0], '999a9');
+        $route = $router->determineRoute(new MockRequest('POST', '/books/999a9'));
+        $this->assertSame($route->handler, 'HandlerClass');
+        $this->assertSame($route->args[0], '999a9');
     }
 
     public function testHandlesParameterNames(): void
     {
         $router = new Router();
         $router->post('/books/*', 'HandlerClass', ['id']);
-        [$handler, $method, $args] = $router->determineRoute(new MockRequest('POST', '/books/343636'));
-        $this->assertSame($handler, 'HandlerClass');
-        $this->assertSame($method, 'post');
-        $this->assertSame($args['id'], '343636');
+        $route = $router->determineRoute(new MockRequest('POST', '/books/343636'));
+        $this->assertSame($route->handler, 'HandlerClass');
+        $this->assertSame($route->args['id'], '343636');
     }
 }

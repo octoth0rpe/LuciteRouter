@@ -12,21 +12,19 @@ class MultipleMatchPatternTest extends TestCase
     {
         $router = new Router();
         $router->post('/books/*/sales', 'HandlerClass');
-        [$handler, $method, $args] = $router->determineRoute(new MockRequest('POST', '/books/999a9/sales'));
-        $this->assertSame($handler, 'HandlerClass');
-        $this->assertSame($method, 'post');
-        $this->assertSame($args[0], '999a9');
+        $route = $router->determineRoute(new MockRequest('POST', '/books/999a9/sales'));
+        $this->assertSame($route->handler, 'HandlerClass');
+        $this->assertSame($route->args[0], '999a9');
     }
 
     public function testHandlesMultipleMatch(): void
     {
         $router = new Router();
         $router->get('/books/*/editions/*', 'HandlerClass');
-        [$handler, $method, $args] = $router->determineRoute(new MockRequest('GET', '/books/1234/editions/5678'));
-        $this->assertSame($handler, 'HandlerClass');
-        $this->assertSame($method, 'get');
-        $this->assertSame($args[0], '1234');
-        $this->assertSame($args[1], '5678');
+        $route = $router->determineRoute(new MockRequest('GET', '/books/1234/editions/5678'));
+        $this->assertSame($route->handler, 'HandlerClass');
+        $this->assertSame($route->args[0], '1234');
+        $this->assertSame($route->args[1], '5678');
     }
 
 
@@ -34,10 +32,9 @@ class MultipleMatchPatternTest extends TestCase
     {
         $router = new Router();
         $router->get('/books/*/editions/*', 'HandlerClass', ['bookId', 'editionId']);
-        [$handler, $method, $args] = $router->determineRoute(new MockRequest('GET', '/books/1234/editions/5678'));
-        $this->assertSame($handler, 'HandlerClass');
-        $this->assertSame($method, 'get');
-        $this->assertSame($args['bookId'], '1234');
-        $this->assertSame($args['editionId'], '5678');
+        $route = $router->determineRoute(new MockRequest('GET', '/books/1234/editions/5678'));
+        $this->assertSame($route->handler, 'HandlerClass');
+        $this->assertSame($route->args['bookId'], '1234');
+        $this->assertSame($route->args['editionId'], '5678');
     }
 }

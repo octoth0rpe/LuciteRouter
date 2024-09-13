@@ -69,7 +69,7 @@ class Router
         return $this;
     }
 
-    public function determineRoute(RequestInterface $request): array
+    public function determineRoute(RequestInterface $request): Route
     {
         $method = $request->getMethod();
         $path = $request->getUri()->getPath();
@@ -78,7 +78,7 @@ class Router
         # check for simple matches (ie, url is /books and path is /books)
         # if we don't find one, then check for pattern matches (url is /b/5, path is /b/*('
         if (isset($possibles['exact'][$path])) {
-            return [$possibles['exact'][$path][0], strtolower($method), []];
+            return new Route($possibles['exact'][$path][0]);
         }
         foreach ($possibles['pattern'] as $pattern => $handler_details) {
             if (fnmatch($pattern, $path)) {
@@ -93,17 +93,16 @@ class Router
                 $matches = $matches[0];
                 array_shift($matches);
                 if (count($param_names) === 0) {
-                    return [$handler, strtolower($method), $matches];
+                    return new Route($handler, $matches);
                 }
                 $aliased_matches = [];
                 foreach ($param_names as $index => $name) {
                     $aliased_matches[$name] = $matches[$index];
                 }
-                return [$handler, strtolower($method), $aliased_matches];
-                ;
+                return new Route($handler, $aliased_matches);
             }
         }
 
-        throw new UnknownRouteException($request->getMethod(), $request->getUri()->getPath());
+        throw new UnknownRouteException($request);
     }
 }
