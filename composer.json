@@ -6,7 +6,7 @@
         "laravel/pint": "^1.17"
     },
     "license": "MIT",
-    "version": "0.0.9",
+    "version": "0.0.10",
     "autoload": {
         "psr-4": {
             "Lucite\\Router\\": "src/"
@@ -20,7 +20,7 @@
     ],
     "require": {
         "psr/http-message": "^2.0",
-        "lucite/utils": "^0.0.4"
+        "lucite/utils": "~0.0"
     },
     "scripts": {
         "format": "pint --preset psr12",

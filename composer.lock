@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "68721da8f22f958ee06c1bc305c2b8ec",
+    "content-hash": "44caa54b94c3cd1fd62c41cf02bd5917",
     "packages": [
         {
             "name": "lucite/utils",
-            "version": "0.0.3",
+            "version": "0.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/octoth0rpe/LuciteUtils.git",
-                "reference": "5936d52fdbbb4de23ce4133c51216af94aec368f"
+                "reference": "de469a1bc4ee5e5f6fc2a2c1d3b94ea73e591165"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/octoth0rpe/LuciteUtils/zipball/5936d52fdbbb4de23ce4133c51216af94aec368f",
-                "reference": "5936d52fdbbb4de23ce4133c51216af94aec368f",
+                "url": "https://api.github.com/repos/octoth0rpe/LuciteUtils/zipball/de469a1bc4ee5e5f6fc2a2c1d3b94ea73e591165",
+                "reference": "de469a1bc4ee5e5f6fc2a2c1d3b94ea73e591165",
                 "shasum": ""
             },
             "require": {
@@ -47,9 +47,9 @@
             "description": "Misc utility functions and classes used by Lucite projects",
             "support": {
                 "issues": "https://github.com/octoth0rpe/LuciteUtils/issues",
-                "source": "https://github.com/octoth0rpe/LuciteUtils/tree/v0.0.3"
+                "source": "https://github.com/octoth0rpe/LuciteUtils/tree/v0.0.5"
             },
-            "time": "2024-09-13T13:58:39+00:00"
+            "time": "2024-09-13T21:51:11+00:00"
         },
         {
             "name": "psr/http-message",
@@ -783,16 +783,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "11.3.4",
+            "version": "11.3.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "d2ef57db1410b102b250e0cdce6675a60c2a993d"
+                "reference": "4dc07a589a68f8f2d5132ac0849146d122e08347"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/d2ef57db1410b102b250e0cdce6675a60c2a993d",
-                "reference": "d2ef57db1410b102b250e0cdce6675a60c2a993d",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/4dc07a589a68f8f2d5132ac0849146d122e08347",
+                "reference": "4dc07a589a68f8f2d5132ac0849146d122e08347",
                 "shasum": ""
             },
             "require": {
@@ -813,7 +813,7 @@
                 "phpunit/php-timer": "^7.0.1",
                 "sebastian/cli-parser": "^3.0.2",
                 "sebastian/code-unit": "^3.0.1",
-                "sebastian/comparator": "^6.0.2",
+                "sebastian/comparator": "^6.1.0",
                 "sebastian/diff": "^6.0.2",
                 "sebastian/environment": "^7.2.0",
                 "sebastian/exporter": "^6.1.3",
@@ -863,7 +863,7 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/phpunit/issues",
                 "security": "https://github.com/sebastianbergmann/phpunit/security/policy",
-                "source": "https://github.com/sebastianbergmann/phpunit/tree/11.3.4"
+                "source": "https://github.com/sebastianbergmann/phpunit/tree/11.3.5"
             },
             "funding": [
                 {
@@ -879,7 +879,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-09-09T06:08:34+00:00"
+            "time": "2024-09-13T05:22:17+00:00"
         },
         {
             "name": "sebastian/cli-parser",
