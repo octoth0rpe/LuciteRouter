@@ -78,15 +78,24 @@ class Router
         foreach ($possibles['pattern'] as $pattern => $handler_details) {
             if (fnmatch($pattern, $path)) {
                 [$handler, $param_names] = $handler_details;
-                $regex = str_replace('*', '([^\/]*)', str_replace('/', '\/', $pattern));
-                $result = preg_match_all('/'.$regex.'/', $path, $matches);
+                $regex = str_replace('/', '\/', $pattern);
+                $regex = str_replace('*', '([^\/]*)', $regex);
+                $regex = '/^'.$regex.'$/';
+                $result = preg_match_all($regex, $path, $matches, PREG_SET_ORDER);
                 if ($result === false) {
                     break;
                 }
-                foreach ($param_names as $index => $name) {
-                    $matches[1][$name] = $matches[1][$index];
+                $matches = $matches[0];
+                array_shift($matches);
+                if (count($param_names) === 0) {
+                    return [$handler, strtolower($method), $matches];
                 }
-                return [$handler, strtolower($method), $matches[1]];
+                $aliased_matches = [];
+                foreach ($param_names as $index => $name) {
+                    $aliased_matches[$name] = $matches[$index];
+                }
+                return [$handler, strtolower($method), $aliased_matches];
+                ;
             }
         }
 
