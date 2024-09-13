@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use PHPUnit\Framework\TestCase;
+use Lucite\Utils\MockRequest;
 use Lucite\Router\Router;
 use Lucite\Router\UnknownRouteException;
 
@@ -12,7 +13,7 @@ final class BasicRouteTest extends TestCase
     {
         $router = new Router();
         $router->get('/books', 'HandlerClass');
-        [$handler, $method] = $router->determineRoute('GET', '/books');
+        [$handler, $method] = $router->determineRoute(new MockRequest('GET', '/books'));
         $this->assertSame($handler, 'HandlerClass');
         $this->assertSame($method, 'get');
     }
@@ -21,7 +22,7 @@ final class BasicRouteTest extends TestCase
     {
         $this->expectException(UnknownRouteException::class);
         $router = new Router();
-        $router->determineRoute('POST', '/books');
+        $router->determineRoute(new MockRequest('POST', '/books'));
     }
 
     public function testRegisterMultipleMethodsIndividually(): void
@@ -30,11 +31,11 @@ final class BasicRouteTest extends TestCase
         $router->get('/books', 'HandlerClass');
         $router->post('/books', 'HandlerClass');
 
-        [$handler, $method] = $router->determineRoute('POST', '/books');
+        [$handler, $method] = $router->determineRoute(new MockRequest('POST', '/books'));
         $this->assertSame($handler, 'HandlerClass');
         $this->assertSame($method, 'post');
 
-        [$handler, $method] = $router->determineRoute('GET', '/books');
+        [$handler, $method] = $router->determineRoute(new MockRequest('GET', '/books'));
         $this->assertSame($handler, 'HandlerClass');
         $this->assertSame($method, 'get');
     }

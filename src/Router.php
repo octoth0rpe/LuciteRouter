@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Lucite\Router;
 
+use Psr\Http\Message\RequestInterface;
+
 class Router
 {
     public $by_method = [
@@ -67,8 +69,11 @@ class Router
         return $this;
     }
 
-    public function determineRoute(string $method, string $path): array
+    public function determineRoute(RequestInterface $request): array
     {
+        $method = $request->getMethod();
+        $path = $request->getUri()->getPath();
+
         $possibles = $this->by_method[$method];
         # check for simple matches (ie, url is /books and path is /books)
         # if we don't find one, then check for pattern matches (url is /b/5, path is /b/*('
@@ -99,6 +104,6 @@ class Router
             }
         }
 
-        throw new UnknownRouteException($method, $path);
+        throw new UnknownRouteException($request->getMethod(), $request->getUri()->getPath());
     }
 }

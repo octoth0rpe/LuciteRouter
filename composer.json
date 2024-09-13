@@ -18,7 +18,10 @@
             "email": "mthorn.work@gmail.com"
         }
     ],
-    "require": {},
+    "require": {
+        "psr/http-message": "^2.0",
+        "lucite/utils": "^0.0.3"
+    },
     "scripts": {
         "format": "pint --preset psr12",
         "test": "phpunit tests/"
