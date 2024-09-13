@@ -78,7 +78,7 @@ class Router
         # check for simple matches (ie, url is /books and path is /books)
         # if we don't find one, then check for pattern matches (url is /b/5, path is /b/*('
         if (isset($possibles['exact'][$path])) {
-            return new Route($possibles['exact'][$path][0]);
+            return new Route($possibles['exact'][$path][0], [], $request);
         }
         foreach ($possibles['pattern'] as $pattern => $handler_details) {
             if (fnmatch($pattern, $path)) {
@@ -93,13 +93,13 @@ class Router
                 $matches = $matches[0];
                 array_shift($matches);
                 if (count($param_names) === 0) {
-                    return new Route($handler, $matches);
+                    return new Route($handler, $matches, $request);
                 }
                 $aliased_matches = [];
                 foreach ($param_names as $index => $name) {
                     $aliased_matches[$name] = $matches[$index];
                 }
-                return new Route($handler, $aliased_matches);
+                return new Route($handler, $aliased_matches, $request);
             }
         }
 
