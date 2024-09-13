@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
+use PHPUnit\Framework\TestCase;
 use Lucite\Router\Router;
 use Lucite\Router\UnknownRouteException;
-use PHPUnit\Framework\TestCase;
 
 final class BasicRouteTest extends TestCase
 {
@@ -23,6 +23,7 @@ final class BasicRouteTest extends TestCase
         $router = new Router();
         $router->determineRoute('POST', '/books');
     }
+
     public function testRegisterMultipleMethodsIndividually(): void
     {
         $router = new Router();
