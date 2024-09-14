@@ -18,6 +18,7 @@ class RequestHandler implements RequestHandlerInterface
     public function __construct(ResponseInterface $response, Router $router, Factory $factory)
     {
         $this->response = $response;
+        $this->router = $router;
         $this->factory = $factory;
     }
 
